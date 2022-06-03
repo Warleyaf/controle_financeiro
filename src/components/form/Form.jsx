@@ -8,8 +8,9 @@ import {
   RadioGroup,
   Button,
 } from './formstyled';
+import { Grid } from "../grid/Grid";
 
-export const Form = ({ handleAdd }) => {
+export const Form = ({ handleAdd, transactionList, setTransactionList }) => {
   const [desc, setDesc] = useState("");
   const [amount, setAmount] = useState("");
   const [isExpense, setExpense] = useState(false);
@@ -42,40 +43,43 @@ export const Form = ({ handleAdd }) => {
 
 
   return (
-    <Container>
-      <InputContent>
-        <Label>Descrição</Label>
-        <Input value={desc} onChange={(e) => setDesc(e.target.value)} />
-      </InputContent>
+    <>
+      <Container>
+        <InputContent>
+          <Label>Descrição</Label>
+          <Input value={desc} onChange={(e) => setDesc(e.target.value)} />
+        </InputContent>
 
-      <InputContent>
-        <Label>Valor</Label>
-        <Input
-          value={amount}
-          type="number"
-          onChange={(e) => setAmount(e.target.value)}
-        />
-      </InputContent>
-      <RadioGroup>
-        <Input
-          type="radio"
-          id="rIncome"
-          defaultChecked
-          name="group1"
-          onChange={() => setExpense(!isExpense)}
-        />
-        <Label htmlFor="rIncome">Entrada</Label>
-        <Input
-          type="radio"
-          id="rExpenses"
-          name="group1"
-          onChange={() => setExpense(!isExpense)}
-        />
-        <Label htmlFor="rExpenses">Saída</Label>
-      </RadioGroup>
+        <InputContent>
+          <Label>Valor</Label>
+          <Input
+            value={amount}
+            type="number"
+            onChange={(e) => setAmount(e.target.value)}
+          />
+        </InputContent>
+        <RadioGroup>
+          <Input
+            type="radio"
+            id="rIncome"
+            defaultChecked
+            name="group1"
+            onChange={() => setExpense(!isExpense)}
+          />
+          <Label htmlFor="rIncome">Entrada</Label>
+          <Input
+            type="radio"
+            id="rExpenses"
+            name="group1"
+            onChange={() => setExpense(!isExpense)}
+          />
+          <Label htmlFor="rExpenses">Saída</Label>
+        </RadioGroup>
 
-      <Button onClick={handleSave} >ADICIONAR</Button>
+        <Button onClick={handleSave} >ADICIONAR</Button>
 
-    </Container>
-  )
+      </Container>
+      <Grid itens={transactionList} setItens={setTransactionList} />
+    </>
+  );
 }
